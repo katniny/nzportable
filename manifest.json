@@ -1,0 +1,54 @@
+{
+    "app-id": "org.nzpteam.nzportable",
+    "runtime": "org.freedesktop.Platform",
+    "runtime-version": "22.08",
+    "sdk": "org.freedesktop.Sdk",
+    "command": "nzportable",
+    "finish-args": [
+        "--device=dri",
+        "--share=ipc",
+        "--socket=pulseaudio",
+        "--socket=x11",
+        "--socket=wayland",
+        "--env=SDL_VIDEODRIVER=x11",
+        "--env=SDL_AUDIODRIVER=pulseaudio"
+    ],
+    "modules": [
+        {
+            "name": "nzportable-all",
+            "buildsystem": "simple",
+            "build-commands": [
+                "mkdir -p /app/bin",
+                "install -Dm755 nzportable64-sdl /app/bin/nzportable.bin",
+                "install -Dm644 default.fmf /app/bin/default.fmf",
+                "mkdir -p /app/bin/nzp",
+                "for f in *; do if [ \"$f\" != \"nzportable64-sdl\" ] && [ \"$f\" != \"default.fmf\" ]; then cp -r \"$f\" /app/bin/nzp/; fi; done",
+                "echo \"$BUILD_STRING\" > /app/bin/nzp/version.txt",
+                "printf '%s\n' '#!/bin/sh' 'cd /app/bin' 'exec ./nzportable.bin \"$@\"' > nzportable-wrapper",
+                "install -Dm755 nzportable-wrapper /app/bin/nzportable"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/nzp-team/assets/releases/download/newest/pc-nzp-assets.zip",
+                    "sha256": "76b8e9c78c27a859b982a66111592366a4289c8301c2cee1aedd1eb434f66d55"
+                },
+                {
+                    "type": "archive",
+                    "url": "https://github.com/nzp-team/quakec/releases/download/bleeding-edge/fte-nzp-qc.zip",
+                    "sha256": "3c5655b545b0ababa68a3effc550b70a73af9e2c4d5deb0ce6f439764eb5ce2b"
+                },
+                {
+                    "type": "archive",
+                    "url": "https://github.com/nzp-team/fteqw/releases/download/bleeding-edge/pc-nzp-linux64.zip",
+                    "sha256": "b2913fffea9118a7112bdf2bea44b2f076bd623ecd459d60c572e659df76adff"
+                }
+            ],
+            "build-options": {
+                "env": {
+                    "BUILD_STRING": "nightly"
+                }
+            }
+        }
+    ]
+}
