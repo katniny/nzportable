@@ -26,14 +26,14 @@ jobs:
         run: |
           ./generate-nightly.sh ${{ secrets.GITHUB_TOKEN }}
       - name: Build flatpak
-        uses: flatpak/flatpak-builder-actions@v1
+        uses: bilelmoussaoui/flatpak-github-actions@v1
         with:
           manifest: flatpak-assembly/manifest.json
           repo: flatpak-assembly/repo
           build-dir: flatpak-assembly/build-dir
           arch: x86_64
       - name: Create Flatpak Bundle
-        uses: flatpak/flatpak-builder-action@v1
+        uses: bilelmoussaoui/flatpak-github-actions@v1
         with:
           repo: flatpak-assembly/repo
           bundle-path: out/nzportable.flatpak
