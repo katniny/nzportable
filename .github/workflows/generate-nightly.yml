@@ -25,12 +25,6 @@ jobs:
         working-directory: ./
         run: |
           ./generate-nightly.sh ${{ secrets.GITHUB_TOKEN }}
-      - name: Build flatpak
-        uses: bilelmoussaoui/flatpak-github-actions@v1
-        with:
-          manifest-path: flatpak-assembly/manifest.json
-      - name: Create Flatpak Bundle
-        run: flatpak build-bundle flatpak-assembly/repo out/nzportable.flatpak gay.nzp.nzportable
       - name: Get Build Date
         id: date
         run: echo "::set-output name=date::$(cat release_version.txt)"
