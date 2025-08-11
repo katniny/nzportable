@@ -28,16 +28,9 @@ jobs:
       - name: Build flatpak
         uses: bilelmoussaoui/flatpak-github-actions@v1
         with:
-          manifest: flatpak-assembly/manifest.json
-          repo: flatpak-assembly/repo
-          build-dir: flatpak-assembly/build-dir
-          arch: x86_64
+          manifest-path: flatpak-assembly/manifest.json
       - name: Create Flatpak Bundle
-        uses: bilelmoussaoui/flatpak-github-actions@v1
-        with:
-          repo: flatpak-assembly/repo
-          bundle-path: out/nzportable.flatpak
-          bundle-name: gay.nzp.nzportable
+        run: flatpak build-bundle flatpak-assembly/repo out/nzportable.flatpak gay.nzp.nzportable
       - name: Get Build Date
         id: date
         run: echo "::set-output name=date::$(cat release_version.txt)"
