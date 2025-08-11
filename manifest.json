@@ -1,7 +1,7 @@
 {
     "app-id": "gay.nzp.nzportable",
     "runtime": "org.freedesktop.Platform",
-    "runtime-version": "22.08",
+    "runtime-version": "23.08",
     "sdk": "org.freedesktop.Sdk",
     "command": "nzportable",
     "finish-args": [
@@ -23,7 +23,7 @@
                 "mkdir -p /app/share/nzportable",
                 "# install the game binary",
                 "install -Dm755 nzportable64-sdl /app/share/nzportable/nzportable.bin",
-                "install -Dm644 defa23.08ult.fmf /app/share/nzportable/default.fmf",
+                "install -Dm644 default.fmf /app/share/nzportable/default.fmf",
                 "# install game data",
                 "mkdir -p /app/share/nzportable/nzp",
                 "for f in *; do if [ \"$f\" != \"nzportable64-sdl\" ] && [ \"$f\" != \"default.fmf\" ]; then cp -r \"$f\" /app/share/nzportable/nzp/; fi; done",

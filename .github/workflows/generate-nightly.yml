@@ -174,7 +174,6 @@ jobs:
           sed -i "s/SHA256_QUAKEC_PLACEHOLDER/$QUAKEC_SHA/" manifest.json
           sed -i "s/SHA256_FTEQW_PLACEHOLDER/$FTEQW_SHA/" manifest.json
           sed -i "s/\"nightly\"/\"$BUILD_STRING\"/" manifest.json
-          sed -i "s/22.08/23.08/g" manifest.json
           
           echo "Updated manifest.json:"
           cat manifest.json
