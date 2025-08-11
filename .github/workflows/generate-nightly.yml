@@ -25,6 +25,19 @@ jobs:
         working-directory: ./
         run: |
           ./generate-nightly.sh ${{ secrets.GITHUB_TOKEN }}
+      - name: Build flatpak
+        uses: flatpak/flatpak-builder-actions@v1
+        with:
+          manifest: flatpak-assembly/manifest.json
+          repo: flatpak-assembly/repo
+          build-dir: flatpak-assembly/build-dir
+          arch: x86_64
+      - name: Create Flatpak Bundle
+        uses: flatpak/flatpak-builder-action@v1
+        with:
+          repo: flatpak-assembly/repo
+          bundle-path: out/nzportable.flatpak
+          bundle-name: gay.nzp.nzportable
       - name: Get Build Date
         id: date
         run: echo "::set-output name=date::$(cat release_version.txt)"
@@ -77,6 +90,7 @@ jobs:
             ./out/nzportable-linux64.zip
             ./out/nzportable-linuxarm64.zip
             ./out/nzportable-linuxarmhf.zip
+            ./out/nzportable.flatpak
             ./out/nzportable-psp.zip
             ./out/nzportable-switch.zip
             ./out/nzportable-vita.zip
@@ -100,6 +114,7 @@ jobs:
             ./out/nzportable-linux64.zip
             ./out/nzportable-linuxarm64.zip
             ./out/nzportable-linuxarmhf.zip
+            ./out/nzportable.flatpak
             ./out/nzportable-psp.zip
             ./out/nzportable-switch.zip
             ./out/nzportable-vita.zip
@@ -123,6 +138,7 @@ jobs:
             ./out/nzportable-linux64.zip
             ./out/nzportable-linuxarm64.zip
             ./out/nzportable-linuxarmhf.zip
+            ./out/nzportable.flatpak
             ./out/nzportable-psp.zip
             ./out/nzportable-switch.zip
             ./out/nzportable-vita.zip
@@ -146,6 +162,7 @@ jobs:
             ./out/nzportable-linux64.zip
             ./out/nzportable-linuxarm64.zip
             ./out/nzportable-linuxarmhf.zip
+            ./out/nzportable.flatpak
             ./out/nzportable-psp.zip
             ./out/nzportable-switch.zip
             ./out/nzportable-vita.zip

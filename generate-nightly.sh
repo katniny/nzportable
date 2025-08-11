@@ -295,8 +295,4 @@ sed -i "s/SHA256_ASSETS_PLACEHOLDER/$ASSETS_SHA/" manifest.json
 sed -i "s/SHA256_QUAKEC_PLACEHOLDER/$QUAKEC_SHA/" manifest.json
 sed -i "s/SHA256_FTEQW_PLACEHOLDER/$FTEQW_SHA/" manifest.json
 sed -i "s/\"nightly\"/\"$BUILD_STRING\"/" manifest.json
-# build
-mkdir -p repo
-flatpak-builder --arch=x86_64 --repo=repo --force-clean build-dir manifest.json
-flatpak build-bundle repo ../out/nzportable.flatpak gay.nzp.nzportable
 cd ../
