@@ -158,8 +158,8 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y flatpak flatpak-builder
-          flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-          flatpak --user install -y flathub org.freedesktop.Platform//23.08 org.freedesktop.Sdk//23.08
+          sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+          sudo flatpak install -y flathub org.freedesktop.Platform//23.08 org.freedesktop.Sdk//23.08
       - name: Download release files to get sha256s
         run: |
           wget https://github.com/nzp-team/nzportable/releases/download/nightly/build-version.txt
