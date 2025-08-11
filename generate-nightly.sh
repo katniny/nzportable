@@ -142,7 +142,7 @@ wget -nc https://github.com/nzp-team/quakespasm/releases/download/bleeding-edge/
 wget -nc https://github.com/nzp-team/quakespasm/releases/download/bleeding-edge/vita-nzp-vpk.zip
 
 # Directory setup
-mkdir -p {pc-assembly,psp-assembly,vita-assembly,nx-assembly,3ds-assembly,nspire-assembly,out}
+mkdir -p {pc-assembly,psp-assembly,vita-assembly,nx-assembly,3ds-assembly,nspire-assembly,flatpak-assembly,out}
 echo $BUILD_STRING > release_version.txt
 
 #
@@ -280,4 +280,22 @@ cd assets/
 zip -q -r ../nzportable-nspire.zip ./*
 cd ../
 mv nzportable-nspire.zip ../out/
+cd ../
+
+#
+# Assemble Flatpak Build
+#
+cd flatpak-assembly
+cp ./manifest.json .
+# get and replace the sha256 values, which flatpak needs to build
+ASSETS_SHA=$(sha256sum ../pc-nzp-assets.zip | cut -d' ' -f1)
+QUAKEC_SHA=$(sha256sum ../fte-nzp-qc.zip | cut -d' ' -f1)
+FTEQW_SHA=$(sha256sum ../pc-nzp-linux64.zip | cut -d' ' -f1)
+sed -i "s/SHA256_ASSETS_PLACEHOLDER/$ASSETS_SHA/" manifest.json
+sed -i "s/SHA256_QUAKEC_PLACEHOLDER/$QUAKEC_SHA/" manifest.json
+sed -i "s/SHA256_FTEQW_PLACEHOLDER/$FTEQW_SHA/" manifest.json
+sed -i "s/\"nightly\"/\"$BUILD_STRING\"/" manifest.json
+# build
+flatpak-builder --arch=x86_64 --repo=repo build-dir manifest.json
+flatpak build-bundle repo ../out/nzportable.flatpak gay.nzp.nzportable
 cd ../

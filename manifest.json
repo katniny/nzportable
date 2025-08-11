@@ -36,17 +36,17 @@
                 {
                     "type": "archive",
                     "url": "https://github.com/nzp-team/assets/releases/download/newest/pc-nzp-assets.zip",
-                    "sha256": "76b8e9c78c27a859b982a66111592366a4289c8301c2cee1aedd1eb434f66d55"
+                    "sha256": "SHA256_ASSETS_PLACEHOLDER"
                 },
                 {
                     "type": "archive",
                     "url": "https://github.com/nzp-team/quakec/releases/download/bleeding-edge/fte-nzp-qc.zip",
-                    "sha256": "3c5655b545b0ababa68a3effc550b70a73af9e2c4d5deb0ce6f439764eb5ce2b"
+                    "sha256": "SHA256_QUAKEC_PLACEHOLDER"
                 },
                 {
                     "type": "archive",
                     "url": "https://github.com/nzp-team/fteqw/releases/download/bleeding-edge/pc-nzp-linux64.zip",
-                    "sha256": "b2913fffea9118a7112bdf2bea44b2f076bd623ecd459d60c572e659df76adff"
+                    "sha256": "SHA256_FTEQW_PLACEHOLDER"
                 }
             ],
             "build-options": {
