@@ -14,9 +14,6 @@ jobs:
       - name: Get apt ready
         run: |
           apt update
-          apt install -y software-properties-common
-          add-apt-repository ppa:alexlarsson/flatpak
-          apt update
           apt install -y zip unzip wget curl git jq
       - name: Assemble Archives
         continue-on-error: false
@@ -26,16 +23,6 @@ jobs:
       - name: Get Build Date
         id: date
         run: echo "::set-output name=date::$(cat release_version.txt)"
-      - name: Upload Flatpak artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: flatpak-build-files
-          path: |
-            flatpak-assembly/manifest.json
-            pc-nzp-assets.zip
-            fte-nzp-assets.zip
-            pc-nzp-linux64.zip
-          retention-days: 1
       - name: Delete Old Release
         uses: dev-drprasad/delete-tag-and-release@v0.2.1
         with:
@@ -167,11 +154,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4 
-      - name: Download Flatpak artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: flatpak-build-files
-          path: ./
+      - name: Download Flatpak and dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y flatpak flatpak-builder
+          sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+          sudo flatpak install -y flathub org.freedesktop.Platform//22.08 org.freedesktop.Sdk//22.08
       - name: Build Flatpak
         uses: flatpak/flatpak-github-actions/flatpak-builder@v6
         with:
