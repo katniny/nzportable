@@ -286,7 +286,7 @@ cd ../
 # Assemble Flatpak Build
 #
 cd flatpak-assembly
-cp ./manifest.json .
+cp ../manifest.json .
 # get and replace the sha256 values, which flatpak needs to build
 ASSETS_SHA=$(sha256sum ../pc-nzp-assets.zip | cut -d' ' -f1)
 QUAKEC_SHA=$(sha256sum ../fte-nzp-qc.zip | cut -d' ' -f1)
@@ -296,6 +296,7 @@ sed -i "s/SHA256_QUAKEC_PLACEHOLDER/$QUAKEC_SHA/" manifest.json
 sed -i "s/SHA256_FTEQW_PLACEHOLDER/$FTEQW_SHA/" manifest.json
 sed -i "s/\"nightly\"/\"$BUILD_STRING\"/" manifest.json
 # build
+mkdir -p repo
 flatpak-builder --arch=x86_64 --repo=repo build-dir manifest.json
 flatpak build-bundle repo ../out/nzportable.flatpak gay.nzp.nzportable
 cd ../
