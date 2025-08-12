@@ -184,7 +184,7 @@ jobs:
           wget "$ENGINE_URL" -O fte-nzp-engine.zip
           ASSETS_SHA=$(sha256sum pc-nzp-assets.zip | cut -d' ' -f1)
           QUAKEC_SHA=$(sha256sum fte-nzp-qc.zip | cut -d' ' -f1)
-          FTEQW_SHA=$(sha256sum pc-nzp-linux64.zip | cut -d' ' -f1)
+          FTEQW_SHA=$(sha256sum fte-nzp-engine.zip | cut -d' ' -f1)
           sed -i "s/SHA256_ASSETS_PLACEHOLDER/$ASSETS_SHA/" manifest.json
           sed -i "s/SHA256_QUAKEC_PLACEHOLDER/$QUAKEC_SHA/" manifest.json
           sed -i "s/SHA256_FTEQW_PLACEHOLDER/$FTEQW_SHA/" manifest.json
