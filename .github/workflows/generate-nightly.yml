@@ -154,7 +154,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        arch: [x86_64, i386, arm, aarch64]
+        arch: [x86_64, aarch64]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -163,16 +163,18 @@ jobs:
           sudo apt update
           sudo apt install -y flatpak flatpak-builder
           sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-          sudo flatpak install -y flathub org.freedesktop.Platform//23.08 org.freedesktop.Sdk//23.08
+          if [ "${{ matrix.arch }}" = "x86_64" ]; then
+            sudo flatpak install -y flathub org.freedesktop.Platform//23.08 org.freedesktop.Sdk//23.08
+          else
+            flatpak --user install -y flathub org.freedesktop.Platform//23.08 org.freedesktop.Sdk//23.08
+          fi
       - name: Map CPU architecture to engine ZIP name
         id: archmap
         run: |
           case "${{ matrix.arch }}" in
             x86_64)   echo "engine_arch=linux64"     >> $GITHUB_OUTPUT ;;
-            i386)     echo "engine_arch=linux32"     >> $GITHUB_OUTPUT ;;
             aarch64)  echo "engine_arch=linux_arm64" >> $GITHUB_OUTPUT ;;
-            arm)      echo "engine_arch=linux_armhf" >> $GITHUB_OUTPUT ;;
-            *)        echo "Unknown arch: ${{ matrix.arch }}" && exit 1 ;;
+            *)        echo "Unsupported arch: ${{ matrix.arch }}" && exit 1 ;;
           esac
       - name: Download release files to get sha256s
         run: |
@@ -188,7 +190,7 @@ jobs:
           sed -i "s/SHA256_ASSETS_PLACEHOLDER/$ASSETS_SHA/" manifest.json
           sed -i "s/SHA256_QUAKEC_PLACEHOLDER/$QUAKEC_SHA/" manifest.json
           sed -i "s/SHA256_FTEQW_PLACEHOLDER/$FTEQW_SHA/" manifest.json
-          sed -i "s|\"url\": \"URL_FTEQW_PLACEHOLDER\"|\"url\": \"${ENGINE_URL//&/\\&}\"|" manifest.json
+          sed -i "s|\"url\": \"URL_FTEQW_PLACEHOLDER\"|\"url\": \"$ENGINE_URL\"|" manifest.json
           sed -i "s/\"nightly\"/\"$BUILD_STRING\"/" manifest.json
 
           echo "Updated manifest.json:"
@@ -196,7 +198,7 @@ jobs:
       - name: Build Flatpak
         uses: flatpak/flatpak-github-actions/flatpak-builder@v6
         with:
-          bundle: nzportable.flatpak
+          bundle: nzportable-${{ steps.archmap.outputs.engine_arch }}.flatpak
           manifest-path: manifest.json
           arch: ${{ matrix.arch }}
           cache-key: flatpak-builder-${{ github.sha }}-${{ matrix.arch }}
@@ -204,7 +206,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: nightly
-          files: nzportable-${{ matrix.arch }}.flatpak
+          files: nzportable-${{ steps.archmap.outputs.engine_arch }}.flatpak
           token: ${{ secrets.GITHUB_TOKEN }}
 
   deploy-to-itch:
