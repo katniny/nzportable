@@ -187,9 +187,9 @@ jobs:
           sed -i "s/SHA256_ASSETS_PLACEHOLDER/$ASSETS_SHA/" manifest.json
           sed -i "s/SHA256_QUAKEC_PLACEHOLDER/$QUAKEC_SHA/" manifest.json
           sed -i "s/SHA256_FTEQW_PLACEHOLDER/$FTEQW_SHA/" manifest.json
-          sed -i "s|\"url\": \"URL_FTEQW_PLACEHOLDER\"|\"url\": \"$ENGINE_URL\"|" manifest.json
+          sed -i "s|\"url\": \"URL_FTEQW_PLACEHOLDER\"|\"url\": \"${ENGINE_URL//&/\\&}\"|" manifest.json
           sed -i "s/\"nightly\"/\"$BUILD_STRING\"/" manifest.json
-          
+
           echo "Updated manifest.json:"
           cat manifest.json
       - name: Build Flatpak
