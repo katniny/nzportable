@@ -167,12 +167,13 @@ jobs:
       - name: Map CPU architecture to engine ZIP name
         id: archmap
         run: |
-          case: "${{ matrix.arch }}" in
-            x86_64)   echo "engine-arch=linux64"     >> $GITHUB_OUTPUT ;;
-            i386)     echo "engine-arch=linux32"     >> $GITHUB_OUTPUT ;;
-            aarch64)  echo "engine-arch=linux_arm64" >> $GITHUB_OUTPUT ;;
-            arm)      echo "engine-arch=linux_armhf" >> $GITHUB_OUTPUT ;;
-            *)        echo "Unknown arch: ${{ matrix.arch }}" && exit 1 ;; 
+          case "${{ matrix.arch }}" in
+            x86_64)   echo "engine_arch=linux64"     >> $GITHUB_OUTPUT ;;
+            i386)     echo "engine_arch=linux32"     >> $GITHUB_OUTPUT ;;
+            aarch64)  echo "engine_arch=linux_arm64" >> $GITHUB_OUTPUT ;;
+            arm)      echo "engine_arch=linux_armhf" >> $GITHUB_OUTPUT ;;
+            *)        echo "Unknown arch: ${{ matrix.arch }}" && exit 1 ;;
+          esac
       - name: Download release files to get sha256s
         run: |
           ENGINE_URL="https://github.com/nzp-team/fteqw/releases/download/bleeding-edge/pc-nzp-${{ steps.archmap.outputs.engine_arch }}.zip"
