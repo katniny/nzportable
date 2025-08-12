@@ -45,7 +45,7 @@
                 },
                 {
                     "type": "archive",
-                    "url": "https://github.com/nzp-team/fteqw/releases/download/bleeding-edge/pc-nzp-linux64.zip",
+                    "url": "URL_FTEQW_PLACEHOLDER",
                     "sha256": "SHA256_FTEQW_PLACEHOLDER"
                 }
             ],
