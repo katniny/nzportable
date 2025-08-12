@@ -193,7 +193,7 @@ jobs:
           sed -i "s/SHA256_FTEQW_PLACEHOLDER/$FTEQW_SHA/" manifest.json
           sed -i "s|\"url\": \"URL_FTEQW_PLACEHOLDER\"|\"url\": \"$ENGINE_URL\"|" manifest.json
           sed -i "s/\"nightly\"/\"$BUILD_STRING\"/" manifest.json
-          if ["${{ matrix.variant.arch }}" = "aarch64"]; then
+          if [ "${{ matrix.variant.arch }}" = "aarch64" ]; then
             sed -i "s/nzportable64-sdl/nzportablearm64-sdl/g" manifest.json
           fi
 
