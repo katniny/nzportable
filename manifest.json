@@ -12,8 +12,7 @@
         "--socket=wayland",
         "--env=SDL_VIDEODRIVER=x11",
         "--env=SDL_AUDIODRIVER=pulseaudio",
-        "--filesystem=xdg-config",
-        "--socket=network"
+        "--filesystem=xdg-config"
     ],
     "modules": [
         {
