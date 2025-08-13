@@ -187,7 +187,7 @@ jobs:
           sudo flatpak install -y flathub org.freedesktop.Platform//24.08 org.freedesktop.Sdk//24.08 || true
       - name: Download release files to get sha256s
         run: |
-          set -euo pipefall
+          set -euo pipefail
 
           # Set engine URL per arch
           ENGINE_URL="${{ steps.archmap.outputs.engine_url }}"
