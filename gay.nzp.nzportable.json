@@ -20,7 +20,10 @@
         {
             "name": "nzportable-all",
             "buildsystem": "simple",
-            "build-commands":  [],
+            "build-commands":  [
+                "mkdir -p /app/share/nzportable",
+                "cp -r * /app/share/nzportable/"
+            ],
             "sources": [
                 {
                     "type": "archive",
@@ -45,7 +48,6 @@
                 "mkdir -p /app/share/nzportable",
                 "# install the game binary",
                 "install -Dm755 nzportable64-sdl /app/share/nzportable/nzportable.bin",
-                "install -Dm644 default.fmf /app/share/nzportable/default.fmf",
                 "# install game data",
                 "mkdir -p /app/share/nzportable/nzp",
                 "for f in *; do if [ \"$f\" != \"nzportable64-sdl\" ] && [ \"$f\" != \"default.fmf\" ]; then cp -r \"$f\" /app/share/nzportable/nzp/; fi; done",
@@ -73,7 +75,6 @@
                 "mkdir -p /app/share/nzportable",
                 "# install the game binary",
                 "install -Dm755 nzportablearm64-sdl /app/share/nzportable/nzportable.bin",
-                "install -Dm644 default.fmf /app/share/nzportable/default.fmf",
                 "# install game data",
                 "mkdir -p /app/share/nzportable/nzp",
                 "for f in *; do if [ \"$f\" != \"nzportablearm64-sdl\" ] && [ \"$f\" != \"default.fmf\" ]; then cp -r \"$f\" /app/share/nzportable/nzp/; fi; done",
