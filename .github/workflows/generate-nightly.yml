@@ -188,21 +188,21 @@ jobs:
           ASSETS_SHA=$(sha256sum pc-nzp-assets.zip | cut -d' ' -f1)
           QUAKEC_SHA=$(sha256sum fte-nzp-qc.zip | cut -d' ' -f1)
           FTEQW_SHA=$(sha256sum fte-nzp-engine.zip | cut -d' ' -f1)
-          sed -i "s/SHA256_ASSETS_PLACEHOLDER/$ASSETS_SHA/" manifest.json
-          sed -i "s/SHA256_QUAKEC_PLACEHOLDER/$QUAKEC_SHA/" manifest.json
-          sed -i "s/SHA256_FTEQW_PLACEHOLDER/$FTEQW_SHA/" manifest.json
-          sed -i "s|\"url\": \"URL_FTEQW_PLACEHOLDER\"|\"url\": \"$ENGINE_URL\"|" manifest.json
-          sed -i "s/\"nightly\"/\"$BUILD_STRING\"/" manifest.json
+          sed -i "s/SHA256_ASSETS_PLACEHOLDER/$ASSETS_SHA/" gay.nzp.nzportable.json
+          sed -i "s/SHA256_QUAKEC_PLACEHOLDER/$QUAKEC_SHA/" gay.nzp.nzportable.json
+          sed -i "s/SHA256_FTEQW_PLACEHOLDER/$FTEQW_SHA/" gay.nzp.nzportable.json
+          sed -i "s|\"url\": \"URL_FTEQW_PLACEHOLDER\"|\"url\": \"$ENGINE_URL\"|" gay.nzp.nzportable.json
+          sed -i "s/\"nightly\"/\"$BUILD_STRING\"/" gay.nzp.nzportable.json
           if [ "${{ matrix.variant.arch }}" = "aarch64" ]; then
-            sed -i "s/nzportable64-sdl/nzportablearm64-sdl/g" manifest.json
+            sed -i "s/nzportable64-sdl/nzportablearm64-sdl/g" gay.nzp.nzportable.json
           fi
 
-          cat manifest.json
+          cat gay.nzp.nzportable.json
       - name: Build Flatpak
         uses: flatpak/flatpak-github-actions/flatpak-builder@v6
         with:
           bundle: nzportable-${{ steps.archmap.outputs.engine_arch }}.flatpak
-          manifest-path: manifest.json
+          manifest-path: gay.nzp.nzportable.json
           arch: ${{ matrix.variant.arch }}
           cache-key: flatpak-builder-${{ github.sha }}-${{ matrix.variant.arch }}
           verbose: true
