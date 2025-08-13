@@ -170,13 +170,16 @@ jobs:
         run: |
           case "${{ matrix.variant.arch }}" in
             x86_64)
-              echo "engine_arch=linux64" >> $GITHUB_OUTPUT ;;
-              echo "engine_url=https://github.com/nzp-team/fteqw/releases/download/bleeding-edge/pc-nzp-linux64.zip" >> $GITHUB_OUTPUT ;;
+              echo "engine_arch=linux64" >> $GITHUB_OUTPUT
+              echo "engine_url=https://github.com/nzp-team/fteqw/releases/download/bleeding-edge/pc-nzp-linux64.zip" >> $GITHUB_OUTPUT
+              ;;
             aarch64)
-              echo "engine_arch=linux_arm64" >> $GITHUB_OUTPUT ;;
-              echo "engine_url=https://github.com/nzp-team/fteqw/releases/download/bleeding-edge/pc-nzp-linux_arm64.zip" >> $GITHUB_OUTPUT ;;
+              echo "engine_arch=linux_arm64" >> $GITHUB_OUTPUT
+              echo "engine_url=https://github.com/nzp-team/fteqw/releases/download/bleeding-edge/pc-nzp-linux_arm64.zip" >> $GITHUB_OUTPUT
+              ;;
             *)
-              echo "Unsupported arch: ${{ matrix.variant.arch }}" && exit 1 ;;
+              echo "Unsupported arch: ${{ matrix.variant.arch }}" && exit 1
+              ;;
           esac
       - name: Download Flatpak dependencies + add Flathub remote
         run: |
