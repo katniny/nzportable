@@ -20,6 +20,7 @@
         {
             "name": "nzportable-all",
             "buildsystem": "simple",
+            "build-commands":  [],
             "sources": [
                 {
                     "type": "archive",
