@@ -13,7 +13,8 @@
         "--env=SDL_VIDEODRIVER=x11",
         "--env=SDL_AUDIODRIVER=pulseaudio",
         "--filesystem=xdg-config",
-        "--share=network"
+        "--share=network",
+        "--device=input"
     ],
     "modules": [
         {
