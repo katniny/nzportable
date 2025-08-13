@@ -54,9 +54,6 @@ if [ "$SPASM_REPO_TIME" -ge "$YESTERDAY_TIME" ]; then
     SPASM_UPDATE="1"
 fi
 
-# TEMP: Force build
-PUSH_NIGHTLY="1"
-
 # Do we proceed?
 if [ "$PUSH_NIGHTLY" -ne "1" ]; then
     echo "Nothing to do."
