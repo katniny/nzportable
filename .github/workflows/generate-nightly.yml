@@ -197,7 +197,6 @@ jobs:
             sed -i "s/nzportable64-sdl/nzportablearm64-sdl/g" manifest.json
           fi
 
-          echo "Updated manifest.json:"
           cat manifest.json
       - name: Build Flatpak
         uses: flatpak/flatpak-github-actions/flatpak-builder@v6
