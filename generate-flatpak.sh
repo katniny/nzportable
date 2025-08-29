@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefall
+set -euo pipefail
 
 # Get architecture
 ARCH="$1"
