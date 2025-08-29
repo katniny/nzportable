@@ -7,10 +7,10 @@ ARCH="$1"
 # Set archive URL per arch
 case "$ARCH" in
     x86_64)
-        ARCHIVE_URL="https://github.com/nzportable/releases/download/nightly/nzportable-linux64.zip"
+        ARCHIVE_URL="https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-linux64.zip"
         ;;
     aarch64)
-        ARCHIVE_URL="https://github.com/nzportable/releases/download/nightly/nzportable-linuxarm64.zip"
+        ARCHIVE_URL="https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-linuxarm64.zip"
         ;;
     *)
         echo "Unsupported arch: $ARCH" && exit 1
