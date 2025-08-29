@@ -29,7 +29,7 @@ ARCHIVE_SHA=$(sha256sum nzportable.zip | cut -d' ' -f1)
 
 # Replace placeholders in manifest
 sed -i "s/ARCHIVE_SHA256_REPLACE/${ARCHIVE_SHA}/" gay.nzp.nzportable.json
-sed -i "s/\"nightly\"/\"${BUILD_STRING}\"/" gay.nzp.nzportable.json
+sed -i "s/\"nightly\"/\"${BUILD_VERSION}\"/" gay.nzp.nzportable.json
 
 # Output the updated manifest
 cat gay.nzp.nzportable.json
