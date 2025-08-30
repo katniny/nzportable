@@ -13,7 +13,8 @@
         "--env=SDL_AUDIODRIVER=pulseaudio",
         "--share=network",
         "--device=input",
-        "--require-version=1.16.0"
+        "--require-version=1.16.0",
+        "--allow-backwards-incompatible-device-input"
     ],
     "modules": [
         {
