@@ -42,7 +42,7 @@
                 {
                     "type": "archive",
                     "url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-linux64.zip",
-                    "sha256": "ARCHIVE_SHA256_REPLACE"
+                    "sha256": "5a51f8b6809ce2de2525ae3e1e2004a590f8f5ca226f7a8f0ba634c95c4cc76e"
                 }
             ]
         },
@@ -71,7 +71,7 @@
                 {
                     "type": "archive",
                     "url": "https://github.com/nzp-team/nzportable/releases/download/nightly/nzportable-linuxarm64.zip",
-                    "sha256": "ARCHIVE_SHA256_REPLACE"
+                    "sha256": "4b190ca180fe65408c89862656421a858f798cbbc22cb2b2815b22253a70f00a"
                 }
             ]
         }
