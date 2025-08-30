@@ -9,12 +9,12 @@
         "--share=ipc",
         "--socket=pulseaudio",
         "--socket=x11",
-        "--socket=wayland",
         "--env=SDL_VIDEODRIVER=x11",
         "--env=SDL_AUDIODRIVER=pulseaudio",
-        "--filesystem=xdg-config",
+        "--filesystem=xdg-config/nzportable:rw",
         "--share=network",
-        "--device=input"
+        "--device=input",
+        "--require-version=1.15.4"
     ],
     "modules": [
         {
