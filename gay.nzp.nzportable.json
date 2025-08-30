@@ -14,7 +14,7 @@
         "--filesystem=xdg-config/nzportable:rw",
         "--share=network",
         "--device=input",
-        "--require-version=1.15.4"
+        "--require-version=1.16.0"
     ],
     "modules": [
         {
