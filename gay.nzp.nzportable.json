@@ -62,10 +62,11 @@
             "name": "nzportable",
             "buildsystem": "simple",
             "build-commands": [
-                "install -Dm755 nzportable64-sdl /app/share/nzportable/nzportable.bin",
+                "if [ -f nzportable64-sdl ]; then install -Dm755 nzportable64-sdl /app/share/nzportable/nzportable.bin; fi",
+                "if [ -f nzportablearm64-sdl ]; then install -Dm755 nzportablearm64-sdl /app/share/nzportable/nzportable.bin; fi",
                 "install -Dm644 default.fmf -t /app/share/nzportable",
                 "mkdir -p /app/share/nzportable/nzp",
-                "for f in *; do if [ \"$f\" != \"nzportable64-sdl\" ] && [ \"$f\" != \"default.fmf\" ]; then cp -r \"$f\" /app/share/nzportable/nzp/; fi; done",
+                "for f in *; do if [ \"$f\" != \"nzportable64-sdl\" ] && [ \"$f\" != \"nzportablearm64-sdl\" ] && [ \"$f\" != \"default.fmf\" ]; then cp -r \"$f\" /app/share/nzportable/nzp/; fi; done",
                 "echo \"nightly\" > /app/share/nzportable/nzp/version.txt"
             ],
             "sources": [
